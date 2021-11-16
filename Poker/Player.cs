@@ -3,13 +3,11 @@ namespace Poker
     public class Player
     {
         public int PlayerId;
-        public static int PlayerCounter = 0;
         public Hand Hand { get; set; } = new Hand();
 
-        public Player()
+        public Player(int playerCounter)
         {
-            PlayerCounter += 1;
-            PlayerId = PlayerCounter;
+            PlayerId = playerCounter;
         }
         override public string ToString()
         {

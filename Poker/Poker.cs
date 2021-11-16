@@ -13,12 +13,11 @@ namespace Poker
             while (true)
             {
                 _deck = new Deck();
-                _playerOne = new Player();
-                _playerTwo = new Player();
+                _playerOne = new Player(1);
+                _playerTwo = new Player(2);
 
                 PrepareGame();
                 ShowPlayersCard();
-                AskForSwapCard();
                 ShowGameResults();
 
                 //if (_playerOne.Hand.WinningSet == WinningSet.Straight) break;
@@ -43,18 +42,6 @@ namespace Poker
             Console.WriteLine(_playerOne.Hand.ToString());
             Console.Write(_playerTwo.ToString());
             Console.WriteLine(_playerTwo.Hand.ToString());
-        }
-        private void AskForSwapCard()
-        {
-            Console.WriteLine("Would you like to swap any card? If yes type yes"); 
-
-            if (Console.ReadLine() == "yes")
-            {
-                Console.WriteLine();
-                Console.WriteLine("Which one?");
-                var cardsToSwap = Console.ReadLine();
-            }
-            Console.WriteLine(_playerOne.Hand.ToString());
         }
         private void ShowGameResults()
         {

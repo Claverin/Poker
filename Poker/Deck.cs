@@ -45,13 +45,5 @@ namespace Poker
                 .Select(it=>DrawCard())
                 .ToList();
         }
-        public void SwapCards()
-        {
-
-        }
-        public void DiscardCards()
-        {
-            Console.WriteLine("Write the number of card that you want to discard:");
-        }
     }
 }

@@ -24,9 +24,8 @@ namespace Poker
             else if (this.WinningSet < other.WinningSet) return -1;
             else
             {
-                Console.WriteLine("The sets are same.");
-                Console.WriteLine("Check the high cards: ");
-                Console.WriteLine($"|| {this.highCard} vs {other.highCard} ||");
+                Console.WriteLine("The sets are same so we need to check the high cards: ");
+                Console.WriteLine($"{this.highCard} vs {other.highCard}");
                 Console.WriteLine();
 
                 if (this.highCard > other.highCard) return 1;
