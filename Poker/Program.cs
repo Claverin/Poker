@@ -7,6 +7,7 @@ namespace Poker
         public static void Main(string[] args)
         {
             var poker = new Poker();
+            poker.StartGame();
         }
     }
 }

@@ -4,54 +4,81 @@ namespace Poker
 {
     public class Poker
     {
-        private Deck deck;
-        private Player playerOne;
-        private Player playerTwo;
+        private Deck _deck;
+        private Player _playerOne;
+        private Player _playerTwo;
 
-        public Poker()
+        public void StartGame()
         {
-            deck = new Deck();
-            playerOne = new Player();
-            playerTwo = new Player();
+            while (true)
+            {
+                _deck = new Deck();
+                _playerOne = new Player();
+                _playerTwo = new Player();
 
-            PreareGame();
-            ShowPlayersCard();
-            ShowGameResults();
+                PrepareGame();
+                ShowPlayersCard();
+                AskForSwapCard();
+                ShowGameResults();
+
+                //if (_playerOne.Hand.WinningSet == WinningSet.Straight) break;
+                //if (_playerTwo.Hand.WinningSet == WinningSet.Straight) break;
+
+                if (Console.ReadKey().KeyChar == 'e')
+                {
+                    break;
+                }
+                Console.Clear();
+            }
         }
-        private void PreareGame()
+
+        private void PrepareGame()
         {
-            deck.BuildDeck();
-            playerOne.Hand = deck.GetXCards();
-            playerOne.SortHandByFigure();
-            playerTwo.Hand = deck.GetXCards();
-            playerTwo.SortHandByFigure();
+            _playerOne.Hand.Cards = _deck.GetCards();
+            _playerTwo.Hand.Cards = _deck.GetCards();
         }
         private void ShowPlayersCard()
         {
-            Console.WriteLine(playerOne.ToString());
-            Console.WriteLine(playerTwo.ToString());
+            Console.Write(_playerOne.ToString());
+            Console.WriteLine(_playerOne.Hand.ToString());
+            Console.Write(_playerTwo.ToString());
+            Console.WriteLine(_playerTwo.Hand.ToString());
+        }
+        private void AskForSwapCard()
+        {
+            Console.WriteLine("Would you like to swap any card? If yes type yes"); 
+
+            if (Console.ReadLine() == "yes")
+            {
+                Console.WriteLine();
+                Console.WriteLine("Which one?");
+                var cardsToSwap = Console.ReadLine();
+            }
+            Console.WriteLine(_playerOne.Hand.ToString());
         }
         private void ShowGameResults()
         {
-
-            CardComparator.CheckForWinner(playerOne);
-            CardComparator.CheckForWinner(playerTwo);
+            HandSetAssigner.CheckPlayerWinningSet(_playerOne);
+            HandSetAssigner.CheckPlayerWinningSet(_playerTwo);
 
             Console.WriteLine();
-            Console.WriteLine("Player" + playerOne.PlayerId + " : " + playerOne.winningSet);
-            Console.WriteLine("Player" + playerTwo.PlayerId + " : " + playerTwo.winningSet);
+            Console.WriteLine("Player" + _playerOne.PlayerId + " : " + _playerOne.Hand.WinningSet);
+            Console.WriteLine("Player" + _playerTwo.PlayerId + " : " + _playerTwo.Hand.WinningSet);
             Console.WriteLine();
-            if (playerOne.winningSet > playerTwo.winningSet) Console.WriteLine("The winer is Player " + playerOne.PlayerId);
-            if (playerOne.winningSet < playerTwo.winningSet) Console.WriteLine("The winer is Player " + playerTwo.PlayerId);
-            if (playerOne.winningSet == playerTwo.winningSet)
+
+            var gameResult = _playerOne.Hand.CompareTo(_playerTwo.Hand);
+
+            switch (gameResult)
             {
-                Console.Write("The sets are same so ");
-                if (playerOne.highCard > playerTwo.highCard)
-                    Console.WriteLine("player " + playerOne.PlayerId + " is winning because of high card");
-                else if (playerOne.highCard < playerTwo.highCard)
-                    Console.WriteLine("player " + playerTwo.PlayerId + " is winning because of high card");
-                else Console.WriteLine("it is draw high card:");
-                Console.WriteLine(playerOne.highCard + " || " + playerTwo.highCard);
+                case 1:
+                    Console.WriteLine("The winer is Player " + _playerOne.PlayerId);
+                    break;
+                case -1:
+                    Console.WriteLine("The winer is Player " + _playerTwo.PlayerId);
+                    break;
+                case 0:
+                    Console.WriteLine("Draw");
+                    break;
             }
         }
     }

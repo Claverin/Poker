@@ -1,10 +1,10 @@
 namespace Poker
 {
-    enum Color
+    public enum Color
     {
-        diamond,
-        heart,
-        club,
-        spade
+        Diamond,
+        Heart,
+        Club,
+        Spade
     }
 }

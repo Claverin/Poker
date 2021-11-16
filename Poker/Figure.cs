@@ -1,6 +1,6 @@
 namespace Poker
 {
-    enum Figure
+    public enum Figure
     {
         Two,
         Three,
@@ -10,7 +10,7 @@ namespace Poker
         Seven,
         Eight,
         Nine,
-        Ten =8,
+        Ten,
         Jack,
         Queen,
         King,

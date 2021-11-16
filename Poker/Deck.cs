@@ -4,10 +4,14 @@ using System.Linq;
 
 namespace Poker
 {
-    class Deck
+    public class Deck
     {
-        public List<Card> deck = new List<Card>(52);
-        public void BuildDeck()
+        public List<Card> Cards { get; private set; } = new List<Card>(52);
+        public Deck()
+        {
+            BuildDeck();
+        }
+        private void BuildDeck()
         {
             var colors = Enum
                 .GetValues(typeof(Color))
@@ -21,34 +25,33 @@ namespace Poker
             colors.ForEach(
                 color =>
                 {
-                    figures.ForEach(
-              figure => deck.Add(new Card(figure, color))
-              );
+                    figures.ForEach(figure => Cards
+                    .Add(new Card(figure, color)));
                 }
             );
-
         }
         public Card DrawCard()
         {
-            int randomNumber = new Random().Next(deck.Count);
-            var card = deck[randomNumber];
-            deck.Remove(card);
+            int randomNumber = new Random().Next(Cards.Count);
+            var card = Cards[randomNumber];
+            Cards.Remove(card);
+
             return card;
         }
-        public List<Card> GetXCards(int x = 5)
+        public List<Card> GetCards(int x = 5)
         {
             return Enumerable
                 .Range(0, x)
                 .Select(it=>DrawCard())
                 .ToList();
         }
-        public void ShowDeck()
+        public void SwapCards()
         {
-            deck.ForEach(it => System.Console.WriteLine(it.ToString()));
+
         }
-        public int CountDeck()
+        public void DiscardCards()
         {
-            return deck.Count;
+            Console.WriteLine("Write the number of card that you want to discard:");
         }
     }
 }

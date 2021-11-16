@@ -1,16 +1,15 @@
 namespace Poker
 {
-    class Card
+    public class Card
     {
-        public Figure figure { get; set; }
-        public Color color { get; set; }
+        public Figure Figure { get; set; }
+        public Color Color { get; set; }
         public Card(Figure _figure, Color _color)
         {
-            figure = _figure;
-            color = _color;
+            Figure = _figure;
+            Color = _color;
         }
 
-        override
-        public string ToString() => figure.ToString() + " " + color.ToString();
+        override public string ToString() => $"{Figure} of {Color}";
     }
 }
